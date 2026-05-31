@@ -39,7 +39,7 @@ histórica observada de 1,823 km² em 17 de julho de 2008.
 
 ## Estrutura do repositório
 
-- `primeiro_mapa.ipynb`: notebook principal com toda a análise
+- `trabalho_algodoes_gee.ipynb`: notebook principal com toda a análise
 - `curva_cota_area_volume_algodoes.csv`: tabela com a curva cota-área-volume
 - `*.png`: gráficos gerados pela análise
 - `*.shp` e `*.geojson`: contornos vetoriais do reservatório histórico
