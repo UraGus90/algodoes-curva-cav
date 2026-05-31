@@ -1,0 +1,28 @@
+# Ambiente virtual Python
+.venv/
+venv/
+env/
+
+# Credenciais (NUNCA envie ao GitHub)
+*.credentials
+.env
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Cache do Jupyter
+.ipynb_checkpoints/
+
+# Arquivos grandes (gerados pelo código, não precisam ir ao repositório)
+*.tif
+*.tiff
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configurações do editor
+.vscode/
+.idea/
