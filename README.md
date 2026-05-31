@@ -61,7 +61,7 @@ Universidade Federal do Ceará, Fortaleza, 2014.
 
 ## Autor
 
-Mestrando em Gestão e Regulação de Recursos Hídricos - UFPI
+Gustavo Guimarães Cruz
 
 ## Licença
 
