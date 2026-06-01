@@ -13,13 +13,19 @@ Análise da curva cota-área-volume da Barragem Algodões I (Cocal/PI), que romp
 .\.venv\Scripts\Activate.ps1
 
 # Instalar dependências
-pip install earthengine-api geemap pandas matplotlib jupyter ipykernel geopandas
+pip install -r requirements.txt
+
+# Configurar nbstripout (uma vez por clone — remove outputs do notebook antes de cada commit)
+nbstripout --install --attributes .gitattributes
+
+# Autenticar no Earth Engine (uma vez por máquina)
+earthengine authenticate
 
 # Abrir o notebook
 jupyter notebook trabalho_algodoes_gee.ipynb
 ```
 
-O Python é 3.10.11. O GEE é autenticado via projeto Google Cloud `meumapbiomas` — requer credenciais locais válidas (`earthengine authenticate`).
+O Python é 3.10.11. O GEE usa o projeto Google Cloud `meumapbiomas`.
 
 ## Arquivo principal
 
