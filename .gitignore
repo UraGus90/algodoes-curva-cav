@@ -15,9 +15,11 @@ __pycache__/
 # Cache do Jupyter
 .ipynb_checkpoints/
 
-# Arquivos grandes (gerados pelo código, não precisam ir ao repositório)
+# Arquivos gerados pelo código (não precisam ir ao repositório)
 *.tif
 *.tiff
+*.csv
+imagens_baixadas/
 
 # Arquivos do sistema operacional
 .DS_Store
