@@ -21,6 +21,9 @@ __pycache__/
 *.csv
 imagens_baixadas/
 
+# Índice auxiliar de shapefile gerado pelo GDAL (regenerável)
+*.fix
+
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
