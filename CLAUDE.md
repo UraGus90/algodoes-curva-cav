@@ -21,19 +21,36 @@ nbstripout --install --attributes .gitattributes
 # Autenticar no Earth Engine (uma vez por máquina)
 earthengine authenticate
 
-# Abrir o notebook
-jupyter notebook trabalho_algodoes_gee.ipynb
+# Abrir o notebook (sempre a partir da raiz do repositório)
+jupyter notebook notebooks/trabalho_algodoes_gee.ipynb
 ```
 
 O Python é 3.10.11. O GEE usa o projeto Google Cloud `meumapbiomas`.
 
+## Estrutura do repositório
+
+```
+reservatorios/
+├── notebooks/   → trabalho_algodoes_gee.ipynb (análise principal)
+├── dados/       → shapefiles (versionados), rasters .tif e CSV gerado (ignorados)
+│   └── imagens_baixadas/   → GeoTIFF baixado via geemap (ignorado)
+├── figuras/     → PNGs gerados pela análise (versionados)
+└── raiz: CLAUDE.md, README.md, LICENSE, requirements.txt, configs
+```
+
 ## Arquivo principal
 
-`trabalho_algodoes_gee.ipynb` — notebook único com execução sequencial obrigatória. As células dependem de variáveis definidas nas células anteriores; não execute fora de ordem.
+`notebooks/trabalho_algodoes_gee.ipynb` — notebook único com execução sequencial obrigatória. As células dependem de variáveis definidas nas células anteriores; não execute fora de ordem.
+
+A célula 1 define os caminhos usados pelo restante do notebook, todos derivados de `pasta_projeto` (caminho absoluto local da raiz do repositório):
+- `pasta_dados` = `pasta_projeto / 'dados'` — onde o CSV e o GeoTIFF baixado são salvos
+- `pasta_figuras` = `pasta_projeto / 'figuras'` — onde os PNGs são salvos
+
+Ao clonar em outra máquina, ajuste apenas `pasta_projeto`.
 
 ## Fluxo da análise (células em ordem)
 
-1. **Inicialização**: importa bibliotecas, inicializa GEE com projeto `meumapbiomas`, define `pasta_projeto` com caminho absoluto local.
+1. **Inicialização**: importa bibliotecas, inicializa GEE com projeto `meumapbiomas`, define `pasta_projeto`, `pasta_dados` e `pasta_figuras` (criadas se não existirem).
 2. **Área de estudo e DEM**: define polígono da área (coordenadas UTM/WGS84), carrega `COPERNICUS/DEM/GLO30`.
 3. **Coleção Landsat 5**: filtra `LANDSAT/LT05/C02/T1_L2` de 1999-01-01 a 2009-05-01 com `CLOUD_COVER < 10`.
 4. **Processamento das imagens**: função `processar_landsat5()` aplica fator de escala (`DN × 0.0000275 − 0.2`), mascara nuvens via bits do `QA_PIXEL`, calcula MNDWI = (B2−B5)/(B2+B5) e classifica água com limiar 0.
@@ -47,12 +64,12 @@ O Python é 3.10.11. O GEE usa o projeto Google Cloud `meumapbiomas`.
 
 | Arquivo | Conteúdo |
 |---|---|
-| `curva_cota_area_volume_algodoes.csv` | Tabela com colunas `cota_m`, `area_km2`, `volume_hm3` |
-| `curva_cota_area_volume_algodoes.png` | Três painéis: cota-área, cota-volume, área-volume |
-| `curva_cav_combinada_algodoes.png` | Gráfico único com dois eixos X (área e volume) para relatório |
-| `imagens_baixadas/` | GeoTIFFs baixados via `geemap.ee_export_image` |
+| `dados/curva_cota_area_volume_algodoes.csv` | Tabela com colunas `cota_m`, `area_km2`, `volume_hm3` (ignorado pelo git) |
+| `figuras/curva_cota_area_volume_algodoes.png` | Três painéis: cota-área, cota-volume, área-volume |
+| `figuras/curva_cav_combinada_algodoes.png` | Gráfico único com dois eixos X (área e volume) para relatório |
+| `dados/imagens_baixadas/imagem_algodoes.tif` | GeoTIFF baixado via `geemap.ee_export_image` (ignorado pelo git) |
 
-O CSV é ignorado pelo `.gitignore`? Não — mas foi deletado manualmente (ver `git status`). Regenere executando o notebook completo.
+O CSV é ignorado pelo `.gitignore` (`*.csv`). Regenere executando o notebook completo.
 
 ## Dados de referência (Sampaio, 2014)
 
